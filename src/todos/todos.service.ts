@@ -9,6 +9,27 @@ export class TodosService {
     return this.todos;
   }
 
+  getOne(id: number) {
+    return this.todos.find((todo) => todo.id === id);
+  }
+
+  update(id: number, updateTodo: any) {
+    const todo = this.todos.find((todo) => todo.id === id);
+
+    if (!todo) {
+      return { message: 'Todo not found' };
+    }
+
+    if (updateTodo.title !== undefined) {
+      todo.title = updateTodo.title;
+    }
+
+    if (updateTodo.done !== undefined) {
+      todo.done = updateTodo.done;
+    }
+    return todo;
+  }
+
   create(todo: any) {
     const newTodo = {
       id: this.id++,
